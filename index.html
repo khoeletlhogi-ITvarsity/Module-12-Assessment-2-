@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Contact Book App</title>
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="fontAwesome/css/all.css">
+    </head>
+    <body onload="fetchContacts()">
+        <div class="container">
+            <header>
+                <div class="heading">
+                    <h3>Contacts</h3>
+                </div>                    
+                <div class="header-icons">
+                    <a href="add-contact.html" id="addContact">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    <a href="#" id="refresh">
+                        <i class="fas fa-redo"></i>
+                    </a>    
+                </div>
+            </header>
+            <div class="container">
+                <div id="table">
+                    Contacts loading...
+                </div>
+            </div>
+        </div>
+
+
+        <script src="js/jquery-3.4.1.min.js"></script>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+     
+        <script src="config.js"></script>
+        <script>
+            document.getElementById("refresh").addEventListener('click', fetchContacts);
+            document.getElementById("addContact").addEventListener('click', addContact);
+            
+            function fetchContacts(){
+                fetch(rootPath + "controller/get-contacts/")
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                   displayOutput(data);   
+                })
+            }
+                
+            function displayOutput(data){
+                output =`<section id="trivia" class="p-5">
+                    <div class="container text-center">
+                `;
+                    
+                for (a in data){   
+                    output += ` 
+                        <div class="accordion-item text-center">
+                            <h2 class="accordion-header" id="flush-${data[a].id}">
+                            <button class="accordion-button collapsed row container-fluid p-2" type="button" data-bs-toggle="collapse" data-bs-target="#id-${data[a].id}">
+                                <img src="${rootPath}/controller/uploads/${data[a].avatar}" class="img-thumbnail rounded-circle col-1.1"  width="100px"/>
+                                <h4 class="col-lg-1 col-md-2 col-3 p-2">${data[a].firstname}</h4>
+                                <h4 class="col-lg-1 col-md-2 col-3 p-2">${data[a].lastname}</h4>
+
+                            </button>
+                            </h2>
+                            <div id="id-${data[a].id}" class="accordion-collapse collapse" data-bs-parent="#trivia">
+                                <div class="accordion-body">
+                                    <h5><span class="text-muted">mobile: </span>${data[a].mobile}</h5>
+                                    <a onclick="editContact(${data[a].id})" id="btnId-${data[a].id}" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#EditContactBtn"><i class="fas fa-pencil-alt"></i></a>
+                                    <a onclick="calling(${data[a].id})" id="btnId-${data[a].id}" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#EditContactBtn"><i class="fas fa-phone"></i></a>
+                                    <a onclick="deleteContact(${data[a].id})" id="btnId-${data[a].id}" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#EditContactBtn"><i class="fas fa-trash-alt"></i></a>
+                                    <a onclick="loadingMessages(${data[a].id})" id="btnId-${data[a].id}" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#EditContactBtn"><i class="fas fa-comment"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                        </br>
+                    `;
+                }
+                        
+                output +=`  </div>
+                    </section>`;
+                    document.getElementById("table").innerHTML = output;
+                }
+            
+            function addContact(){
+                window.open("edit-contact.html","_self");
+            }
+            
+            
+            function editContact(id){
+                window.open("edit-contact.html?id=" + id, "_self");
+            }
+            
+            function deleteContact(id){
+                var confirmDelete = confirm("Delete contact. Are you sure?");
+                if(confirmDelete == true){
+                    fetch(rootPath + 'controller/delete-contact/?id=' + id)
+                    .then(function(response){
+                        return response.text();
+                    })
+                    .then(function(data){
+                        if(data == "1"){
+                            fetchContacts();
+                        }else {
+                            alert(data);
+                        }
+                    })
+                }
+            }           
+
+            function loadingMessages(id){
+                var confirmMessage = confirm("Couldn't load messages. Try again later?");
+                if(confirmDelete == true){
+                    window.open("index.html","_self");
+                } 
+            } 
+            
+            function calling(id){
+                var confirmMessage = confirm("Couldn't make a call. Try again later?");
+                if(confirmDelete == true){
+                    window.open("index.html","_self");
+                } 
+            } 
+            
+        </script>
+    </body>
+</html>

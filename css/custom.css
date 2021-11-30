@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 10px;
+    background-color: whitesmoke;
+    font-family: 'Roboto', sans-serif;
+}
+
+.container-fluid {
+    width: 100%;
+    border: 1px solid #bbb;
+    background-color: #f5f2f2;
+    border-radius: 20px;
+}
+
+header {
+    margin-top: 15px;
+    padding-top: 20px;
+    padding-bottom: 45px;
+    z-index: 500;
+}
+
+header .heading h3 {
+    padding: 20px;
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #365949;
+    text-align: center;
+}
+
+header  .header-icons a {
+    text-decoration: none;
+    color: #365949;
+    font-size: 1.qrem;
+    float: right;
+    padding: 10px;
+    
+}
+
+header .row .header-icons i {
+    color: #2a2a2a;
+    align-items: center;
+}
+
+/******************* Table ******************/
+
+.container {
+    align-items: center;
+    width: 100%;
+
+}
+
+/**#table {
+    margin: 20px;
+    align-items: center;
+    width: 100%;
+
+}**/
+
+.accordion-button {
+    border: 1px solid #365949;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.accordion-button :active {
+    border: 1.5px solid #365949;
+    box-shadow: #365949;
+}
+
+h4 {
+    font-family: 'lato', sans-serif;
+    font-size: 1.5rem;
+}
+
+h5 {
+    font-family: 'lato', sans-serif;
+    font-size: 0.9rem;
+}
+
+.btn i {
+    color: #365949;
+    font-size: 1.2rem;
+}
+
+/**************** Edit contact ******************/
+
+.edit-container {
+    align-items: center;
+    width: 80%;
+}
+
+#avatarImage {
+    text-align: center;
+    border-radius: 50%;
+}
+
+#editForm {
+    margin-top: 20px;
+}
+
+#editForm i {
+    color: #365949;
+    size: 1rem;
+    padding: 2px;
+}
+
+#editForm label {
+    font-size: 1rem;
+    color: #365949;
+}
+
+#editForm input {
+    width: 100%;
+    color: #365949;
+    background-color: #cfe6d5;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #365949;
+      
+}
+
+#editForm button {
+    background-color: #365949;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-family: 'lato', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 1px solid #365949;
+    border-radius: 10px;
+    box-shadow: #bbb;
+}
+
+button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #365949;
+    background-color:whitesmoke;
+    color: #365949;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
